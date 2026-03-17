@@ -1,45 +1,46 @@
-import "./reset.css"
 import "./styles.css"
-import { HomePage } from "./home.js";
-import { Menu } from "./menu.js";
-import { Reservation } from "./reservation.js"
 
-/* DOM nodes */
-const contentBox = document.querySelector("#content")
-const navBtns = document.querySelectorAll("nav>button")
+/* store all TODOs */
+const allTodos = []
 
-/* function to clear the Content div */
-function clear() {
-    contentBox.replaceChildren()
+/* a giant root Object that stores all projects and todos */
+const allProjects = {
+
 }
 
-/* create a Navigation function to navigate pages */
-function navigate(page) {
-    clear()
+/* the TODO class */
+class Todo {
+    constructor(title, description, dueDate, priority, completed, projectId) {
+        this.title = title
+        this.description = description
+        this.dueDate = dueDate
+        this.priority = priority
+        this.completed = completed
+        this.projectId = projectId
 
-    if (page === "menu") {
-        Menu()
-    } else if (page === "home") {
-        HomePage()
-    }
-    if (page === "reservations") {
-        Reservation()
+        /* add each todo to the all TODOs array */
+        allTodos.push(this)
     }
 }
 
-/* get which nav button was clicked; call navigate function, and load respective page */
-navBtns.forEach(btn => {
-    btn.addEventListener("click", e => {
-        const page = e.target.dataset.page
-        navigate(page)
 
-        /* Add an (.active class) for Tabbed page */
-        navBtns.forEach(btn => btn.classList.remove("active")) /*Remove .active class from all btns first */
-        e.target.classList.add("active")
-    })
-})
+/* project class to group todos */
+class Project {
+    constructor(title, todo , id) {
+        this.todo = todo
+        this.title = title
+        this.id = id
+    }
+}
 
-/* Load the homepage while opening */
-navigate("home")
-
-export { navigate }
+/* Make a default project to add tasks to the default */
+const t1 = new Todo("study JS", "practice js", "03/17/2026", "Urgent", true, 0)
+const t2 = new Todo("study HTML", "HTML practice", "03/18/2026", "High", true, 0)
+const t3 = new Todo("learn CSS Grid", "build layout", "03/19/2026", "Medium", false, 1)
+const t4 = new Todo("fix bugs", "debug todo app", "03/20/2026", "Urgent", false, 1)
+const t5 = new Todo("read docs", "webpack docs", "03/21/2026", "Low", false, 2)
+const t6 = new Todo("refactor code", "clean structure", "03/22/2026", "High", false, 2)
+const t7 = new Todo("build feature", "add project filter", "03/23/2026", "High", false, 1)
+const t8 = new Todo("practice Git", "branch + merge", "03/24/2026", "Medium", true, 0)
+const t9 = new Todo("UI polish", "improve styling", "03/25/2026", "Low", false, 2)
+const t10 = new Todo("deploy app", "gh-pages setup", "03/26/2026", "Urgent", false, 0)

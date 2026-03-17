@@ -23,6 +23,7 @@ body {
 	font-family: system-ui, "Segoe UI", Roboto, sans-serif;
 	/* 5. Improve text rendering */
 	-webkit-font-smoothing: antialiased;
+	margin: 0;
 }
 
 /* 6. Improve media defaults */
@@ -52,6 +53,7 @@ h4,
 h5,
 h6 {
 	overflow-wrap: break-word;
+	margin: 0;
 }
 
 /* 9. Improve line wrapping */
