@@ -1,5 +1,7 @@
-import "./styles.css"
 import { Todo, Project, assign2Projects, allProjects, allTodos } from "./classes.js"
+import "./reset.css"
+import "./styles.css"
+import "./home.js"
 
 const t1 = new Todo("study JS", "practice js", "03/17/2026", "Urgent", true, 0)
 const t2 = new Todo("study HTML", "HTML practice", "03/18/2026", "High", true, 0)
@@ -15,3 +17,4 @@ const t10 = new Todo("deploy app", "gh-pages setup", "03/26/2026", "Urgent", fal
 
 assign2Projects(allTodos)
 console.log(allProjects)
+console.log()

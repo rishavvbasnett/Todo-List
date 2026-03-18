@@ -1,9 +1,57 @@
-body {
-    margin: 0;
-    min-height: 100vh;
-} 
-
-h1 {
-    color: brown;
-    margin: 0;
+:root {
+    --main-red: 255, 85, 85;
+    --main-blue: 60, 155, 255;
+    --main-bg: 244, 244, 244;
 }
+
+body {
+    min-height: 98vh;
+    background-color: rgb(var(--main-bg));
+}
+
+header {
+    padding-left: clamp(1rem, 6vw, 5rem);
+    padding-right: clamp(1rem, 6vw, 6rem);
+
+    background: rgb(var(--main-blue));
+    height: clamp(60px, 8vw, 85px);
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+header>div {
+    min-height: fit-content;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 1rem + 2vw, 2.6rem);
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(1rem, 6vw, 4rem);
+
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    font-size: clamp(1rem, 1rem + 1.03vw, 1.6rem);
+}
+
+nav>button, nav>button:active {
+    all: unset;
+    padding: 0.4rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 16px;
+}
+
+nav>button:hover {
+    border: 2px solid white;
+}
+
+nav>button:active {
+    transform: scale(0.99);
+}
+
