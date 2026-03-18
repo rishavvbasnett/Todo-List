@@ -1,7 +1,10 @@
-import { Todo, Project, assign2Projects, allProjects, allTodos } from "./classes.js"
 import "./reset.css"
 import "./styles.css"
-import "./home.js"
+
+import { Todo, Project, assign2Projects, allProjects, allTodos } from "./classes.js"
+import { Home } from "./home.js"
+
+Home()
 
 const t1 = new Todo("study JS", "practice js", "03/17/2026", "Urgent", true, 0)
 const t2 = new Todo("study HTML", "HTML practice", "03/18/2026", "High", true, 0)
@@ -14,7 +17,5 @@ const t8 = new Todo("practice Git", "branch + merge", "03/24/2026", "Medium", tr
 const t9 = new Todo("UI polish", "improve styling", "03/25/2026", "Low", false, 2)
 const t10 = new Todo("deploy app", "gh-pages setup", "03/26/2026", "Urgent", false, 3)
 
-
 assign2Projects(allTodos)
-console.log(allProjects)
-console.log()
+

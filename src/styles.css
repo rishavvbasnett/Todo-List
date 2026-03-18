@@ -6,6 +6,7 @@
 
 body {
     min-height: 98vh;
+    min-width: fit-content;
     background-color: rgb(var(--main-bg));
 }
 
@@ -26,7 +27,7 @@ header>div {
     min-height: fit-content;
     color: rgb(255, 255, 255);
     font-weight: 700;
-    font-size: clamp(1.3rem, 1rem + 2vw, 2.6rem);
+    font-size: clamp(1.3rem, 1rem + 1vw, 2.6rem);
 }
 
 nav{
@@ -37,7 +38,7 @@ nav{
 
     color: rgb(255, 255, 255);
     font-weight: 500;
-    font-size: clamp(1rem, 1rem + 1.03vw, 1.6rem);
+    font-size: clamp(1rem, 1rem + 0.5vw, 1.3rem);
 }
 
 nav>button, nav>button:active {
@@ -55,3 +56,11 @@ nav>button:active {
     transform: scale(0.99);
 }
 
+#content {
+    margin: 1rem auto;
+    min-width: 490px;
+    max-width: 900px;
+    min-height: fit-content;
+
+    border: 1px solid black;
+}

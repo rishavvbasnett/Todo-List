@@ -1,3 +1,22 @@
-body {
-    min-height: 100vh;
-} 
+/* OuterMost DIV content */
+body.home #content {
+    
+}
+
+/* Project Heading */
+.projectHeading {
+    min-height: 50px;
+    border: 1px solid black;
+}
+
+/* Todo Box */
+.todoBox {
+    min-height: 500px;
+    border: 1px solid rgb(112, 7, 7);
+}
+
+/* Add Task button */ 
+.addTaskBtn {
+    color: black;
+    border: 1px solid black;
+}
