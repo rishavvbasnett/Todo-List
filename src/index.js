@@ -3,6 +3,7 @@ import "./styles.css"
 
 import { Todo, Project, assign2Projects, allProjects, allTodos } from "./classes.js"
 import { Home } from "./home.js"
+import { allTaskObjects } from "./home.js"
 
 Home()
 

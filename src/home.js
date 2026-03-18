@@ -4,7 +4,7 @@ import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubm
 
 
 function Home() {
-    let TaskObject;
+    let allTaskObjects = []
 
     document.body.classList.add("home")
     const contentBox = document.querySelector("#content")
@@ -22,8 +22,9 @@ function Home() {
     const newTaskForm = makeForm(Dialog, "newTaskForm")
         newTaskForm.addEventListener("submit", e=> {
             e.preventDefault();
-            TaskObject = handleSubmit(newTaskForm)
-            console.log(TaskObject)
+            allTaskObjects.push(handleSubmit(newTaskForm))
+            console.log(allTaskObjects)
+            newTaskForm.reset();
             Dialog.close()
         })
         
