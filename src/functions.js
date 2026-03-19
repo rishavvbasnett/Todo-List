@@ -1,3 +1,4 @@
+import { Project } from "./classes"
 
 /* function to make DIVS */
 function makeDiv(className) {
@@ -31,6 +32,15 @@ function createInput(type="text", placeholder, required, id, name) {
     return input
 }
 
+/* function to make INPUT ELEMENTS with properties ready to use */
+function textArea(placeholder, required, id, name) {
+    const textArea = document.createElement("textarea")
+        textArea.placeholder = placeholder
+        textArea.required = required
+        textArea.id = id
+        textArea.name = name
+    return textArea
+}
 /* function to make OPTIONS FOR SELECT ELEMENTS */
 function option(parent, value, text) {
     const option = document.createElement("option")
@@ -53,10 +63,34 @@ function makeForm(parent, type) {
     const form = document.createElement("form")
         form.classList.add(type)
 
+    if (type==="newProjectForm") {
+    /* HEADING */
+    const headingProjectForm = makeDiv("headingProjectForm")   
+        headingProjectForm.append("New Project")
+    /* Project title */
+    const projectTitle = createInput("text", "Project Title", true, "projectTitle", "projectTitle")
+    /* Project id */
+    const projectId = createInput("number", "Unique ID#", true, "projectId", "projectId")
+    /* ADD button */
+    const addBtn = makeBtn("addBtn", "Add")
+    /* Back button */
+    const backBtn = makeBtn("backBtn", "Back")
+        backBtn.type = "reset"
+        backBtn.addEventListener("click", e=> {
+            parent.close()
+        })
+
+    form.append(headingProjectForm, projectTitle, projectId, addBtn, backBtn)
+
+    } else {
+    /* THE FORM FOR ADDING TASKS */
+    /*HEADING */
+    const headingTaskForm = makeDiv("headingTaskForm")
+        headingTaskForm.append("New Task")
     /* Title */
     const taskTitle = createInput("text", "Title", true, "taskTitle", "taskTitle")
     /* DESCRIPTION */
-    const description = createInput("text", "Description", true, "description", "description")
+    const description = textArea("Description", false, "description", "description")
     /* DUE DATE */
     const dueDate = createInput("date", "", true, "dueDate", "dueDate")
     /* PRIORITY */
@@ -77,7 +111,8 @@ function makeForm(parent, type) {
             parent.close()
         })
     
-    form.append(taskTitle, description, dueDate, priority, addBtn, backBtn)
+    form.append(headingTaskForm, taskTitle, description, dueDate, priority, addBtn, backBtn)
+    }
     parent.append(form)
     return form
 } 

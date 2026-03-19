@@ -12,7 +12,7 @@ body.home #content {
 /* Todo Box */
 .todoBox {
     min-height: 500px;
-    border: 1px solid rgb(112, 7, 7);
+    border: 2px solid rgb(229, 15, 15);
 }
 
 /* Add Task button */ 
@@ -20,3 +20,39 @@ body.home #content {
     color: black;
     border: 1px solid black;
 }
+
+/* New Task dialog box */
+.NewTask:modal {
+    min-height: fit-content;
+    min-width: fit-content;
+    padding-top: 0;
+}
+
+.newTaskForm {
+    width: clamp(320px, 250px + 9vw, 800px);
+    padding: clamp(1rem, 1rem + 2vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 2vw, 3rem)
+}
+
+.newTaskForm>.headingTaskForm {
+    padding: 0;
+    text-align: center;
+    min-height: fit-content;
+    color: black;
+    font-weight: 700;
+    font-size: clamp(1.3rem, 1rem + 0.7vw, 1.7rem)
+}
+
+.newTaskForm>button {
+}
+
+.newTaskForm>input, .newTaskForm>select {
+    height: clamp(1rem, 1rem + 5vw, 2.5rem);
+}
+
+.newTaskForm>:nth-child(3) {
+    height: clamp(4rem, 4rem + 5vw, 6rem);
+}
+
