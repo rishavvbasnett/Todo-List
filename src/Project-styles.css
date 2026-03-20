@@ -1,10 +1,14 @@
 /* Outermost div content */
 body.projects #content {
-
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 0.5rem + 1vw, 3rem);
 }
 
 /* page Title */
 .pageTitle {
+    text-align: center;
     min-height: fit-content;
     color: black;
     font-weight: 700;
@@ -16,6 +20,18 @@ body.projects #content {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    border: 2px solid rgb(212, 16, 16);
+    min-height: 500px;
+}
+
+/* The project Cards */
+.projectListBox>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 1rem 0;
 }
 
 /* New Project Dialog Box */
@@ -44,9 +60,7 @@ body.projects #content {
 }
 
 
-.newProjectForm>button {
-    
-}
+.newProjectForm>button {}
 
 .newProjectForm>input {
     height: clamp(1rem, 1rem + 5vw, 2.5rem);

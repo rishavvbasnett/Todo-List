@@ -1,7 +1,5 @@
 /* OuterMost DIV content */
-body.home #content {
-    
-}
+body.home #content {}
 
 /* Project Heading */
 .projectHeading {
@@ -15,7 +13,7 @@ body.home #content {
     border: 2px solid rgb(229, 15, 15);
 }
 
-/* Add Task button */ 
+/* Add Task button */
 .addTaskBtn {
     color: black;
     border: 1px solid black;
@@ -45,10 +43,10 @@ body.home #content {
     font-size: clamp(1.3rem, 1rem + 0.7vw, 1.7rem)
 }
 
-.newTaskForm>button {
-}
+.newTaskForm>button {}
 
-.newTaskForm>input, .newTaskForm>select {
+.newTaskForm>input,
+.newTaskForm>select {
     height: clamp(1rem, 1rem + 5vw, 2.5rem);
 }
 
@@ -56,3 +54,17 @@ body.home #content {
     height: clamp(4rem, 4rem + 5vw, 6rem);
 }
 
+.todoBox {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.todoBox>.task {
+    border: 2px solid black;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}

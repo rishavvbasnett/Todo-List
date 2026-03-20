@@ -16,7 +16,7 @@ header {
 
     background: rgb(var(--main-blue));
     height: clamp(60px, 8vw, 85px);
-    
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,7 +30,7 @@ header>div {
     font-size: clamp(1.3rem, 1rem + 1vw, 2.6rem);
 }
 
-nav{
+nav {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -41,7 +41,8 @@ nav{
     font-size: clamp(1rem, 1rem + 0.5vw, 1.3rem);
 }
 
-nav>button, nav>button:active {
+nav>button,
+nav>button:active {
     all: unset;
     padding: 0.4rem 1rem;
     border: 2px solid transparent;
@@ -58,7 +59,7 @@ nav>button:active {
 
 #content {
     margin: 1rem auto;
-    min-width: 490px;
+    min-width: fit-content;
     max-width: 900px;
     min-height: fit-content;
 
