@@ -1,4 +1,3 @@
-import { Project } from "./classes"
 
 /* function to make DIVS */
 function makeDiv(className) {
@@ -32,7 +31,7 @@ function createInput(type = "text", placeholder, required, id, name) {
     return input
 }
 
-/* function to make INPUT ELEMENTS with properties ready to use */
+/* function to make textArea */
 function textArea(placeholder, required, id, name) {
     const textArea = document.createElement("textarea")
     textArea.placeholder = placeholder
@@ -115,4 +114,4 @@ function makeForm(parent, type) {
     return form
 }
 
-export { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit }
+export { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit}

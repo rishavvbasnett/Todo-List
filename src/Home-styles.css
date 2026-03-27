@@ -1,5 +1,12 @@
 /* OuterMost DIV content */
-body.home #content {}
+body.home #content {
+
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 0.5rem + 1vw, 3rem);
+}
+
 
 /* Project Heading */
 .projectHeading {
