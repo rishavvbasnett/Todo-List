@@ -1,3 +1,4 @@
+import { format, parseISO } from "date-fns"
 import "./Home-styles.css"
 import { Todo, Project, allProjects, myProjects, fetchAllProjects, fetchMyProjects, loadState, updateState } from "./classes.js"
 import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit } from "./functions.js"
@@ -77,19 +78,25 @@ function Home(projectId = 0) {
 
             const dueDate = document.createElement("p")
             dueDate.classList.add("dueDate")
-            dueDate.textContent = todo.dueDate
+            const dateString = parseISO(todo.dueDate)
+            const theDueDate = format(dateString, "MMM dd, yyyy")
+            dueDate.textContent = theDueDate
 
             const priority = document.createElement("p")
             priority.classList.add("priority")
-            priority.textContent = todo.priority
+
             if (todo.priority === "urgent") {
                 taskDiv.classList.add("urgent")
+                priority.textContent = "Urgent"
             } else if (todo.priority === "high") {
                 taskDiv.classList.add("high")
+                priority.textContent = "High"
             } else if (todo.priority === "moderate") {
                 taskDiv.classList.add("moderate")
+                priority.textContent = "Moderate"
             } else if (todo.priority === "low") {
                 taskDiv.classList.add("low")
+                priority.textContent = "Low"
             }
 
             const edit = makeBtn("editBtn", "Edit")

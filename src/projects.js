@@ -1,4 +1,5 @@
 import "./Project-styles.css"
+import { format, parseISO } from 'date-fns'
 import { Todo, Project, loadState, updateState, myProjects, allProjects} from "./classes.js"
 import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit} from "./functions.js"
 import { Home } from "./home.js"
@@ -79,13 +80,14 @@ function Projects() {
 
     /* Function to Remove Projects from Data */
     function removeProject(projectId) {
+        
         loadState()
         const removeIndex = myProjects.findIndex(Project => Project.id == projectId)
 
         if ((allProjects[projectId].length) > 0) {
             const choice = prompt(`This Project has ${allProjects[projectId].length} tasks. Do you want to delete it? (y/n)`)
             
-            if (choice.toLowerCase() === "y") {
+            if (choice === "y") {
                 myProjects.splice(removeIndex, 1)
                 delete allProjects[projectId]
             } else {
