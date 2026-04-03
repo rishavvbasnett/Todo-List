@@ -1,7 +1,7 @@
 import { format, parseISO } from "date-fns"
 import "./Home-styles.css"
-import { Todo, Project, allProjects, myProjects, fetchAllProjects, fetchMyProjects, loadState, updateState } from "./classes.js"
-import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit } from "./functions.js"
+import { Todo, Project, allProjects, myProjects, loadState, updateState } from "./classes.js"
+import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit, getSvg, makeTick, makeDelete, makeEdit} from "./functions"
 import { clear } from "./index.js"
 
 function Home(projectId = 0) {
@@ -81,26 +81,37 @@ function Home(projectId = 0) {
             const dateString = parseISO(todo.dueDate)
             const theDueDate = format(dateString, "MMM dd, yyyy")
             dueDate.textContent = theDueDate
-
-            const priority = document.createElement("p")
-            priority.classList.add("priority")
-
+            
             if (todo.priority === "urgent") {
                 taskDiv.classList.add("urgent")
-                priority.textContent = "Urgent"
+
             } else if (todo.priority === "high") {
                 taskDiv.classList.add("high")
-                priority.textContent = "High"
+
             } else if (todo.priority === "moderate") {
                 taskDiv.classList.add("moderate")
-                priority.textContent = "Moderate"
+                
             } else if (todo.priority === "low") {
                 taskDiv.classList.add("low")
-                priority.textContent = "Low"
+            
             }
 
-            const edit = makeBtn("editBtn", "Edit")
-            const remove = makeBtn("doneBtn", "Remove")
+            const logoDiv = makeDiv("logoDIv")
+            
+            const tickBtn = document.createElement("button")
+                tickBtn.classList.add("tickBtn")
+                const tickIcon = makeTick()
+                tickBtn.append(tickIcon)
+            const editBtn = document.createElement("button")
+                editBtn.classList.add("editBtn")
+                const editIcon= makeEdit()
+                editBtn.append(editIcon)
+            const deleteBtn = document.createElement("button")
+                deleteBtn.classList.add("deleteBtn")
+                const deleteIcon = makeDelete()
+                deleteBtn.append(deleteIcon)
+
+                logoDiv.append(tickBtn, editBtn, deleteBtn)
 
             /* Event listener Edit or remove a todo */
             taskDiv.addEventListener("click", e => {
@@ -125,7 +136,7 @@ function Home(projectId = 0) {
                 }
             })
 
-            taskDiv.append(title, dueDate, priority, edit, remove)
+            taskDiv.append(title, dueDate, logoDiv)
             todoBox.append(taskDiv)
         })
     }

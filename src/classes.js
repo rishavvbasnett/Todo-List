@@ -20,10 +20,14 @@ class Todo {
 
 /*The PROJECT CLASS */
 class Project {
-    constructor(title) {
+    constructor({title, id}) {
         this.title = title
-        this.id = Math.floor(Math.random() * 90)
-
+        if (id === 0) {
+            this.id = 0
+        } else {
+            this.id = Math.floor(Math.random() * 90)
+        }
+        
         loadState()
         allProjects[this.id] = []
         myProjects.push(this)
@@ -39,7 +43,9 @@ function loadState() {
     if (!storedProjects && !storedMyProjects) {
         localStorage.clear()
         allProjects = { 0: []}
-        myProjects = [{ title: "Default Project", id: 0 }]
+        /* Make a default project object with id = 0 */
+        const defaultProject = new Project({title: "Default List of Todos", id: 0})
+        myProjects = []
         updateState()
     } else {
         allProjects = JSON.parse(localStorage.getItem("allProjects"))

@@ -37,7 +37,7 @@ function Projects() {
         e.preventDefault()
 
         const projectObject = handleSubmit(newProjectForm)
-        const project = new Project(projectObject.projectTitle, projectObject.projectId)
+        const project = new Project({title: projectObject.projectTitle, id: projectObject.projectId})
 
         renderProjects()
         newProjectForm.reset()
