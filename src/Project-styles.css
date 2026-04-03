@@ -4,6 +4,7 @@ body.projects #content {
     display: flex;
     flex-direction: column;
     gap: clamp(1rem, 0.5rem + 1vw, 3rem);
+    background: transparent;
 }
 
 /* page Title */

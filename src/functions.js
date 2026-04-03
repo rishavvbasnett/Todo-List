@@ -99,7 +99,6 @@ function makeForm(parent, type) {
         const option1 = option(priority, "low", "Low")
         const option2 = option(priority, "moderate", "Moderate")
         const option3 = option(priority, "high", "High")
-        const option5 = option(priority, "urgent", "Urgent")
         /* ADD button */
         const addBtn = makeBtn("addBtn", "Add")
         /* Back button */
@@ -128,10 +127,10 @@ function getSvg(code, name) {
 /* function to make the CHECKMark icon */
 function makeTick() {
     return getSvg(`
-        <svg class="icon" viewBox="-2.4 -2.4 28.8 28.8">
-            <path d="M5 14L9 17L18 6">
-            </path></svg>" `
-        , "tick");
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17l-5-5"/>
+        </svg> `
+        , "todoBox__svg--tick");
 }
 
 /* function to make the Edit icon */
@@ -144,7 +143,7 @@ function makeEdit() {
             <path d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13" stroke-linecap="round" stroke-linejoin="round">  
             </path>
         </svg>`
-        , "edit");
+        , "todoBox__svg--edit");
 }
 
 function makeDelete() {
@@ -157,7 +156,7 @@ function makeDelete() {
             <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke-linecap="round"     stroke-linejoin="round"></path> 
             <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
-        `, "delete")
+        `, "todoBox__svg--delete")
 }
 
 export { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit, getSvg, makeTick, makeDelete, makeEdit}
