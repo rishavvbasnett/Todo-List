@@ -4,21 +4,19 @@ import "./styles.css"
 /* Pages */
 import { Home, allTaskObjects } from "./home.js"
 import { Projects, allProjectObjects } from "./projects.js"
-import { Todo, Project, myProjects, allProjects, allTodos } from "./classes.js"
-
-/* Run with a default Project with ID# 0 */
-const DefaultProject = new Project("Default Todo List")
-DefaultProject.changeId(0)
+import { Todo, Project, loadState, updateState } from "./classes.js"
 
 /* Open with the Home page Rendered */
+loadState()
 Home()
 
-/* clear */
+/* function to clear Content Box */
 function clear() {
     const contentBox = document.querySelector("#content")
     contentBox.replaceChildren()
 }
 
+/* function to render the pages */
 function renderPage(page) {
     if (page === "home") {
         clear()
@@ -27,10 +25,9 @@ function renderPage(page) {
         clear()
         Projects()
     }
-
 }
 
-/* Logic for changing page based on the nav button clicked */
+/* Logic to render pages based on Nav Buttons */
 const headerButtons = document.querySelectorAll("nav>button")
 headerButtons.forEach(btn => {
     btn.addEventListener("click", e => {
@@ -38,7 +35,6 @@ headerButtons.forEach(btn => {
         renderPage(page)
     })
 })
-
 
 
 export { clear }

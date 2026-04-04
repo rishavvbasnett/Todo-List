@@ -1,8 +1,6 @@
-const allTodos = []  /*Store all Todos*/
-const allProjects = { } /*Store all Projects */
-const myProjects = []    /* all Project ids that exist */
+let allProjects;
+let myProjects;
 
-/* the TODO CLASS */
 class Todo {
     constructor(title, description, dueDate, priority, completed, projectId) {
         this.title = title
@@ -11,32 +9,54 @@ class Todo {
         this.priority = priority
         this.completed = completed
         this.projectId = projectId
-        this.taskId = Math.floor(Math.random()*90)
-       
-        allTodos.push(this)    /* add each todo to the all TODOs array */
-        allProjects[this.projectId].push(this)    /* add this TODO to repective project id */
+        this.taskId = Math.floor((Math.random() * 90) + 10)
+
+        /* everytime, update the state from localStorage */
+        loadState()
+        allProjects[this.projectId].push(this)
+        updateState()
     }
 }
 
 /*The PROJECT CLASS */
 class Project {
-    constructor(title) {
+    constructor({title, id}) {
         this.title = title
-        this.id = Math.floor(Math.random()*90)
-
-        myProjects.push(this)   /* Add this project to myProjects list */
-        allProjects[this.id] = []   /* Make a property name with the project id */
-    }
-
-    changeId(newId) {
-        const oldId = this.id
-        allProjects[newId] = allProjects[oldId]
-        allProjects[newId].forEach(todo => {
-            todo.projectId = newId
-        })
-        delete allProjects[oldId]
-        this.id = newId
+        if (id === 0) {
+            this.id = 0
+        } else {
+            this.id = Math.floor(Math.random() * 90)
+        }
+        
+        loadState()
+        allProjects[this.id] = []
+        myProjects.push(this)
+        updateState()
     }
 }
 
-export { Todo, Project, allProjects, allTodos, myProjects }
+/* function to fetch update exisiting allProjects and myProjects from localStorage */
+function loadState() {
+    const storedProjects = localStorage.getItem("allProjects")
+    const storedMyProjects = localStorage.getItem("myProjects")
+
+    if (!storedProjects && !storedMyProjects) {
+        localStorage.clear()
+        allProjects = { 0: []}
+        /* Make a default project object with id = 0 */
+        const defaultProject = new Project({title: "Default List of Todos", id: 0})
+        myProjects = []
+        updateState()
+    } else {
+        allProjects = JSON.parse(localStorage.getItem("allProjects"))
+        myProjects = JSON.parse(localStorage.getItem("myProjects"))
+    }
+    
+}
+/* function to update allProjects and myProjects to localStorage */
+function updateState() {
+    localStorage.setItem("allProjects", JSON.stringify(allProjects))
+    localStorage.setItem("myProjects", JSON.stringify(myProjects))
+}
+
+export { Todo, Project, allProjects, myProjects, loadState, updateState }

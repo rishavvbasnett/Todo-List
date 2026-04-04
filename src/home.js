@@ -1,29 +1,36 @@
+import { format, parseISO } from "date-fns"
 import "./Home-styles.css"
-import { Todo, Project, myProjects, allProjects, allTodos } from "./classes.js"
-import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit } from "./functions.js"
+import { Todo, Project, allProjects, myProjects, loadState, updateState } from "./classes.js"
+import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit, getSvg, makeTick, makeDelete, makeEdit } from "./functions"
+import { clear } from "./index.js"
 
 function Home(projectId = 0) {
+
+    loadState()
 
     document.body.classList.add("home")
     const contentBox = document.querySelector("#content")
 
     /* PROJECT HEADING div */
     const projectHeading = makeDiv("projectHeading")
+
     /* Get project title that was clicked */
     const theProject = myProjects.find(project => project.id == projectId)
     projectHeading.textContent = theProject.title
     contentBox.append(projectHeading)
 
-    /* ToDo list box */
+    /* Todo list box */
     const todoBox = makeDiv("todoBox")
     contentBox.append(todoBox)
+    renderTodos()
 
     /* Make a dialogBox and Form for ADD TASK Button */
     const Dialog = makeDialog("NewTask")
 
     const newTaskForm = makeForm(Dialog, "newTaskForm")
 
-    /* Input elements for the form */
+    /* Make Input elements for the form to load while opening to edit */
+
     const titleInput = newTaskForm.querySelector("#taskTitle")
     const descriptionInput = newTaskForm.querySelector("#description")
     const dueDateInput = newTaskForm.querySelector("#dueDate")
@@ -34,21 +41,17 @@ function Home(projectId = 0) {
     /* Task form submit event */
     newTaskForm.addEventListener("submit", e => {
         e.preventDefault();
-        const task = handleSubmit(newTaskForm)
 
         if (currentTodo) {
-            currentTodo.title = task.taskTitle
-            currentTodo.description = task.description
-            currentTodo.priority = task.priority
-            currentTodo.dueDate = task.dueDate
-            updateTodoBox(currentTodo)
-            Dialog.close()
-        } else {
-            const todo = new Todo(task.taskTitle, task.description, task.dueDate, task.priority, false, projectId)
-            renderTodo(todo)
-            newTaskForm.reset();
-            Dialog.close()
+            let todo2Delete = allProjects[currentTodo.projectId].findIndex(todo => todo.taskId == currentTodo.taskId)
+            allProjects[currentTodo.projectId].splice(todo2Delete, 1)
+            updateState()
         }
+        const task = handleSubmit(newTaskForm)
+        const todo = new Todo(task.taskTitle, task.description, task.dueDate, task.priority, false, projectId)
+        renderTodos()
+        newTaskForm.reset();
+        Dialog.close()
     })
 
     /* Add Task button */
@@ -59,71 +62,93 @@ function Home(projectId = 0) {
     })
 
     /* Function to render Todos and display it/ add to the DOM */
-    function renderTodo(todo) {
-        const taskDiv = makeDiv(todo.taskId)
-        taskDiv.dataset.id = todo.taskId
-        taskDiv.classList.add("task")
+    function renderTodos() {
 
-        const title = document.createElement("p")
-        title.classList.add("title")
-        title.textContent = todo.title
+        todoBox.replaceChildren()
+        loadState()
 
-        const dueDate = document.createElement("p")
-        dueDate.classList.add("dueDate")
-        dueDate.textContent = todo.dueDate
+        allProjects[projectId].forEach(todo => {
 
-        const priority = document.createElement("p")
-        priority.classList.add("priority")
-        priority.textContent = todo.priority
-        if (todo.priority === "urgent") {
-            taskDiv.classList.add("urgent")
-        } else if (todo.priority === "high") {
-            taskDiv.classList.add("high")
-        } else if (todo.priority === "moderate") {
-            taskDiv.classList.add("moderate")
-        } else if (todo.priority === "low") {
-            taskDiv.classList.add("low")
-        }
-
-        const expand = makeBtn("editBtn", "Expand")
-        const done = makeBtn("doneBtn", "Done")
-
-        /* Event listener Edit or remove a todo */
-        taskDiv.addEventListener("click", e => {
-            if ((e.target === e.currentTarget) || (e.target === expand)) {
-                const todo2Edit = allTodos.find(todo => todo.taskId == taskDiv.dataset.id)
-                currentTodo = todo2Edit
-
-                titleInput.value = todo2Edit.title
-                descriptionInput.value = todo2Edit.description
-                priorityInput.value = todo2Edit.priority
-                dueDateInput.value = todo2Edit.dueDate
-
-                Dialog.showModal()
-
-            } else if (e.target === done) {
-                const delId = taskDiv.dataset.id
-                const delIndex = allTodos.findIndex(todo => todo.taskId == delId)
-                allTodos.splice(delIndex, 1)
-                allProjects[projectId].splice(delIndex, 1)
-                todoBox.removeChild(taskDiv)
+            const taskDiv = makeDiv(todo.taskId)
+            taskDiv.dataset.id = todo.taskId
+            taskDiv.classList.add("todoBox__task")
+            if (todo.completed === true) {
+                taskDiv.classList.add("completed")
             }
+
+            const title = document.createElement("p")
+            title.classList.add("todoBox__title")
+            title.textContent = todo.title
+
+            const dueDate = document.createElement("p")
+            dueDate.classList.add("todoBox__dueDate")
+            const dateString = parseISO(todo.dueDate)
+            const theDueDate = format(dateString, "MMM dd, yyyy")
+            dueDate.textContent = theDueDate
+
+            if (todo.priority === "high") {
+                taskDiv.classList.add("high")
+
+            } else if (todo.priority === "moderate") {
+                taskDiv.classList.add("moderate")
+
+            } else if (todo.priority === "low") {
+                taskDiv.classList.add("low")
+
+            }
+
+            const logoDiv = makeDiv("todoBox__logo")
+
+            const tickBtn = document.createElement("button")
+            tickBtn.classList.add("todoBox__button", "todoBox__button--tick")
+            const tickIcon = makeTick()
+            tickBtn.append(tickIcon)
+            const editBtn = document.createElement("button")
+            editBtn.classList.add("todoBox__button", "todoBox__button--edit")
+            const editIcon = makeEdit()
+            editBtn.append(editIcon)
+            const deleteBtn = document.createElement("button")
+            deleteBtn.classList.add("todoBox__button", "todoBox__button--delete")
+            const deleteIcon = makeDelete()
+            deleteBtn.append(deleteIcon)
+
+            logoDiv.append(tickBtn, editBtn, deleteBtn)
+
+            /* Event listener Edit or remove a todo */
+            taskDiv.addEventListener("click", e => {
+                if ((e.target === e.currentTarget) || (e.target.closest(".todoBox__button--edit"))) {
+                    const todo2Edit = allProjects[projectId].find(todo => todo.taskId == taskDiv.dataset.id)
+                    currentTodo = todo2Edit
+
+                    titleInput.value = todo2Edit.title
+                    descriptionInput.value = todo2Edit.description
+                    priorityInput.value = todo2Edit.priority
+                    dueDateInput.value = todo2Edit.dueDate
+
+                    newTaskForm.classList.add("editMode")
+                    Dialog.showModal()
+
+                } else if (e.target.closest(".todoBox__button--delete")) {
+                    const delId = taskDiv.dataset.id
+                    console.log('CLIedk')
+                    const delIndex = allProjects[projectId].findIndex(todo => todo.taskId == delId)
+                    allProjects[projectId].splice(delIndex, 1)
+                    updateState()
+                    todoBox.removeChild(taskDiv)
+
+                } else if (e.target.closest(".todoBox__button--tick")) {
+                    const checkedId = taskDiv.dataset.id
+                    const checkedIndex = allProjects[projectId].findIndex(todo => todo.taskId == checkedId)
+
+                    allProjects[projectId][checkedIndex].completed = !allProjects[projectId][checkedIndex].completed
+                    updateState()
+                    renderTodos()
+                }
+            })
+
+            taskDiv.append(title, dueDate, logoDiv)
+            todoBox.append(taskDiv)
         })
-
-        taskDiv.append(title, dueDate, priority, expand, done)
-        todoBox.append(taskDiv)
-    }
-
-    /* Function to update the Todo box after editing a todo */
-    function updateTodoBox(todo) {
-        const todoDiv = document.querySelector(`[data-id="${todo.taskId}"]`)
-        const title = todoDiv.querySelector(".title")
-        const dueDate = todoDiv.querySelector(".dueDate")
-        const priority = todoDiv.querySelector(".priority")
-
-
-        title.textContent = todo.title
-        dueDate.textContent = todo.dueDate
     }
 
 }
