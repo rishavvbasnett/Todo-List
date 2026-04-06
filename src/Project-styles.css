@@ -1,10 +1,12 @@
 /* Outermost div content */
 body.projects #content {
+    background-color: var(--main-bg);
     border: 0;
     display: flex;
     flex-direction: column;
-    gap: clamp(1rem, 0.5rem + 1vw, 3rem);
+    gap: clamp(2rem, 1.7rem + 1vw, 3rem);
     background: transparent;
+    padding: 2.5rem 0;
 }
 
 /* page Title */
@@ -16,15 +18,13 @@ body.projects #content {
     color: black;
     font-weight: 600;
     font-size: clamp(1.3rem, 1.1rem + 1.5vw, 1.7rem);
-    letter-spacing: 0.3px;
-    margin-top: clamp(1.1rem, 1rem + 2vw, 1.4rem);
-    margin-bottom: clamp(1rem, 1rem + 1vw, 1.2rem);
+    letter-spacing: 0.9px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
-
 /* New project button */
 .newProjectBtn {
     align-self: center;
@@ -52,7 +52,8 @@ body.projects #content {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    min-height: 500px;
+    height: fit-content;
+    min-height: 250px;
 }
 
 /* The project Cards */
@@ -68,8 +69,8 @@ body.projects #content {
     color: var(--text);
 
     transition: 
-        transform 0.2s ease,
-        width 0.2s ease;
+        transform 0.22s ease,
+        width 0.22s ease;
 
     border-radius: 12px;
 }
@@ -90,8 +91,8 @@ body.projects #content {
     width: 21px;
 }
 .projectDiv:hover {
-    transform: translateY(-3px);
-    box-shadow: rgba(10, 10, 10, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* logo Div for the svg */
@@ -151,47 +152,101 @@ body.projects #content {
 .projectDiv__title {
     font-weight: 600;
     font-size: clamp(1.1rem, 1.14rem + 0.2vw, 1.4rem);
-    transition: translate 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 
-
-
-
-
-
-
-
-
-
 /* New Project Dialog Box */
-.NewProject:modal {
+.newProject:modal {
     min-height: max-content;
     min-width: fit-content;
     padding: 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.newProject::backdrop {
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+}
+
+.newProjectForm>*{
+    width: 100%;
+    font-weight: 400;
 }
 
 /* New Project Form */
 .newProjectForm {
-    width: clamp(200px, 250px + 4vw, 600px);
-    padding: clamp(1rem, 1rem + 2vw, 1.7rem);
-    padding-bottom: clamp(1.5rem, 1rem + 4vw, 2.1rem);
+    width: clamp(300px, 290px + 3vw, 420px);
+    height: clamp(430px, 410px + 3vw, 500px);
+    padding: clamp(2.7rem, 2.5rem + 2vw, 3rem) clamp(1rem, 1rem + 2vw, 1.7rem);
     display: flex;
     flex-direction: column;
-    gap: clamp(1.5rem, 2vw, 3rem)
+    justify-content: space-around;
+    gap: 0.5rem;
 }
 
 .newProjectForm>.headingProjectForm {
+    position: relative;
+    font-size: 1.6rem;
     text-align: center;
     min-height: fit-content;
     color: black;
-    font-weight: 700;
-    font-size: clamp(1.3rem, 1rem + 0.7vw, 1.7rem)
+    font-weight: 600;
+    font-size: clamp(1.6rem, 1rem + 4vw, 1.8rem);
+    letter-spacing: 0.7px;
+    margin-bottom: 2rem;
+}
+.headingProjectForm::after {
+    position: absolute;
+    content: "";
+    border-bottom: 1px solid #e5e7f0;
+    left: 50%;
+    width: 190px;
+    bottom: 0;
+    border-radius: 2px;
+    transform: translateX(-50%);
 }
 
+.newProjectForm button {
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0.58rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.newProjectForm>.addBtn {
+    background-color: rgb(var(--main-blue));
+    color: white;
+    position: relative;
+    top: clamp(23px, 20px + 2vw, 30px);
+}
 
-.newProjectForm>button {}
+.newProjectForm>.backBtn {
+    background-color: #f1f3f9;
+    border: 1px solid #d0d4e4;
+    color: #444;
+    position: relative;
+    top: clamp(16px, 13px + 2vw, 18px);
+}
+.newProjectForm button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 9px rgba(60, 155, 255, 0.3);
+}
 
 .newProjectForm>input {
-    height: clamp(1rem, 1rem + 5vw, 2.5rem);
+    padding: 1.4rem 0.8rem;
+    border: 1px solid #d0d4e4;
+    background-color: #f6f6f7;
+    outline: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border 0.15 ease, box-shadow 0.15 ease;
+    height: clamp(1.5rem, 1.3rem + 5vw, 2.5rem);
+}
+.newProjectForm input:focus {
+    border: 1px solid rgb(var(--main-blue));
+    box-shadow: 0 0 3px 3px rgba(91, 141, 239, 0.15);
+    background: white;
 }

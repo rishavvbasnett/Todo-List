@@ -1,7 +1,7 @@
 :root {
     --main-red: 255, 85, 85;
-    --main-blue: 60, 155, 255;
-    --main-bg: #f6f7fb;
+    --main-blue: 35, 155, 400;
+    --main-bg: #f8f8f8f8;
     --text: #1a1a1a;
 
 }
@@ -29,8 +29,9 @@ header {
 header>div {
     min-height: fit-content;
     color: rgb(255, 255, 255);
-    font-weight: 700;
+    font-weight: 600;
     font-size: clamp(1.3rem, 1rem + 1vw, 2.6rem);
+    letter-spacing: 1px;
 }
 
 nav {
@@ -40,7 +41,8 @@ nav {
     gap: clamp(1rem, 6vw, 4rem);
 
     color: rgb(255, 255, 255);
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.8px;
     font-size: clamp(1rem, 1rem + 0.5vw, 1.3rem);
 }
 
@@ -65,6 +67,5 @@ nav>button:active {
     min-width: fit-content;
     max-width: 900px;
     min-height: fit-content;
-
     border: 1px solid black;
 }
