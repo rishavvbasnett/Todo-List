@@ -4,9 +4,23 @@ import { Todo, Project, allProjects, myProjects, loadState, updateState } from "
 import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit, getSvg, makeTick, makeDelete, makeEdit } from "./functions"
 import { clear } from "./index.js"
 
-function Home(projectId = 0) {
+function Home(projectId) {
 
     loadState()
+
+    /* Check if the Default project with project Id 0 exists */
+    const projectIds = []
+    myProjects.forEach(project => {
+        projectIds.push(project.id)
+    })
+    
+    if (projectId) {
+        projectId = projectId
+    } else if (projectIds.includes(0)) {
+        projectId = 0
+    } else {
+        projectId = projectIds[0]
+    }
 
     document.body.classList.add("home")
     const contentBox = document.querySelector("#content")
@@ -30,7 +44,8 @@ function Home(projectId = 0) {
     const newTaskForm = makeForm(Dialog, "newTaskForm")
 
     /* Make Input elements for the form to load while opening to edit */
-
+    const titleDiv = newTaskForm.querySelector(".headingTaskForm")
+    const addBtn = newTaskForm.querySelector(".addBtn")
     const titleInput = newTaskForm.querySelector("#taskTitle")
     const descriptionInput = newTaskForm.querySelector("#description")
     const dueDateInput = newTaskForm.querySelector("#dueDate")
@@ -52,20 +67,32 @@ function Home(projectId = 0) {
         renderTodos()
         newTaskForm.reset();
         Dialog.close()
+        currentTodo = null
     })
 
     /* Add Task button */
-    const addTaskBtn = makeBtn("addTaskBtn", "Add a Task")
+    const addTaskBtn = makeBtn("addTaskBtn", "New Task")
     contentBox.append(addTaskBtn)
     addTaskBtn.addEventListener("click", e => {
+        titleDiv.textContent = "New Task"
+        addBtn.textContent = "Add"
         Dialog.showModal()
     })
 
     /* Function to render Todos and display it/ add to the DOM */
     function renderTodos() {
-
+        
         todoBox.replaceChildren()
         loadState()
+
+        if (allProjects[projectId].length<1) {
+            const Notice = document.createElement("h2")
+                Notice.textContent = "Congrats! You have no task left to do."
+                Notice.classList.add("Notice")
+
+            todoBox.appendChild(Notice)
+        }
+
 
         allProjects[projectId].forEach(todo => {
 
@@ -119,7 +146,9 @@ function Home(projectId = 0) {
                 if ((e.target === e.currentTarget) || (e.target.closest(".todoBox__button--edit"))) {
                     const todo2Edit = allProjects[projectId].find(todo => todo.taskId == taskDiv.dataset.id)
                     currentTodo = todo2Edit
-
+            
+                    titleDiv.textContent = "Edit Task"
+                    addBtn.textContent = "Save"
                     titleInput.value = todo2Edit.title
                     descriptionInput.value = todo2Edit.description
                     priorityInput.value = todo2Edit.priority

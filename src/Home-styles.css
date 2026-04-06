@@ -8,7 +8,6 @@ body.home #content {
 
 /* Project Heading */
 .projectHeading {
-    color: var(--text);
     min-height: 40px;
     font-size: clamp(1.3rem, 1.1rem + 1.5vw, 1.7rem);
     font-weight: 600;
@@ -43,13 +42,10 @@ body.home #content {
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
-
-    position: relative;
-    top: -30px;
 }
 
 .addTaskBtn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -250,7 +246,7 @@ body.home #content {
     font-weight: 400;
     font-size: clamp(1rem, 1rem + 0.2vw, 1.1rem);
     color: #020425;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .todoBox__logo {
@@ -309,4 +305,15 @@ body.home #content {
 
 .todoBox__button:hover .todoBox__svg--delete {
     stroke: red;
+}
+
+.Notice {
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+    position: relative;
+    text-align: center;
+    top: 200px;
 }

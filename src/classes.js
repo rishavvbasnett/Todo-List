@@ -27,7 +27,6 @@ class Project {
         } else {
             this.id = Math.floor(Math.random() * 90)
         }
-        
         loadState()
         allProjects[this.id] = []
         myProjects.push(this)
@@ -37,15 +36,14 @@ class Project {
 
 /* function to fetch update exisiting allProjects and myProjects from localStorage */
 function loadState() {
+
     const storedProjects = localStorage.getItem("allProjects")
     const storedMyProjects = localStorage.getItem("myProjects")
 
-    if (!storedProjects && !storedMyProjects) {
+    if (!storedProjects && !storedMyProjects || storedProjects === "{}" && storedMyProjects === "[]") {
         localStorage.clear()
-        allProjects = { 0: []}
-        /* Make a default project object with id = 0 */
-        const defaultProject = new Project({title: "Default List of Todos", id: 0})
-        myProjects = []
+        allProjects = {0: []}
+        myProjects = [{title: "Default List", id: 0}]
         updateState()
     } else {
         allProjects = JSON.parse(localStorage.getItem("allProjects"))

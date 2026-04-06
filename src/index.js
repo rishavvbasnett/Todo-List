@@ -8,7 +8,7 @@ import { Todo, Project, loadState, updateState } from "./classes.js"
 
 /* Open with the Home page Rendered */
 loadState()
-Home()
+Projects()
 
 /* function to clear Content Box */
 function clear() {
