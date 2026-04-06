@@ -117,10 +117,10 @@ function makeForm(parent, type) {
 /* function to make SVG elements */
 function getSvg(code, name) {
     const template = document.createElement("template")
-        template.innerHTML = code;
+    template.innerHTML = code;
 
     const svg = template.content.querySelector("svg").cloneNode(true)
-        svg.classList.add(name)
+    svg.classList.add(name)
     return svg
 }
 
@@ -159,4 +159,4 @@ function makeDelete() {
         `, "todoBox__svg--delete")
 }
 
-export { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit, getSvg, makeTick, makeDelete, makeEdit}
+export { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit, getSvg, makeTick, makeDelete, makeEdit }

@@ -25,6 +25,7 @@ body.projects #content {
     align-items: center;
     position: relative;
 }
+
 /* New project button */
 .newProjectBtn {
     align-self: center;
@@ -37,9 +38,9 @@ body.projects #content {
     font-weight: 600;
 
     cursor: pointer;
-    transition: 
+    transition:
         transform 0.2s ease;
-        box-shadow: 0.2 ease;
+    box-shadow: 0.2 ease;
 }
 
 .newProjectBtn:hover {
@@ -68,7 +69,7 @@ body.projects #content {
     background-color: #e0e1ea;
     color: var(--text);
 
-    transition: 
+    transition:
         transform 0.22s ease,
         width 0.22s ease;
 
@@ -87,9 +88,10 @@ body.projects #content {
     transition: width 0.2s ease;
 }
 
-.projectDiv:hover::before{
+.projectDiv:hover::before {
     width: 21px;
 }
+
 .projectDiv:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
@@ -116,7 +118,7 @@ body.projects #content {
     justify-content: center;
     align-items: center;
 
-    transition: 
+    transition:
         transform 0.2s ease,
         background-color 0.15s ease;
     ;
@@ -126,6 +128,7 @@ body.projects #content {
     transform: translateY(-2px);
     background-color: rgba(0, 0, 0, 0.04);
 }
+
 .projectDiv:hover .projectDiv__title {
     transform: translateX(0.8rem);
 }
@@ -137,13 +140,14 @@ body.projects #content {
     stroke-width: 1.5px;
     stroke: black;
     fill: none;
-    
+
     transition: stroke 0.13s ease;
 }
 
 .projectDiv__button--edit:hover .projectDiv__svg--edit {
     stroke: blue;
 }
+
 .projectDiv__button--delete:hover .projectDiv__svg--delete {
     stroke: red;
 }
@@ -170,7 +174,7 @@ body.projects #content {
     backdrop-filter: blur(2px);
 }
 
-.newProjectForm>*{
+.newProjectForm>* {
     width: 100%;
     font-weight: 400;
 }
@@ -197,6 +201,7 @@ body.projects #content {
     letter-spacing: 0.7px;
     margin-bottom: 2rem;
 }
+
 .headingProjectForm::after {
     position: absolute;
     content: "";
@@ -216,6 +221,7 @@ body.projects #content {
     padding: 0.58rem;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
 .newProjectForm>.addBtn {
     background-color: rgb(var(--main-blue));
     color: white;
@@ -230,6 +236,7 @@ body.projects #content {
     position: relative;
     top: clamp(16px, 13px + 2vw, 18px);
 }
+
 .newProjectForm button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 9px rgba(60, 155, 255, 0.3);
@@ -245,6 +252,7 @@ body.projects #content {
     transition: border 0.15 ease, box-shadow 0.15 ease;
     height: clamp(1.5rem, 1.3rem + 5vw, 2.5rem);
 }
+
 .newProjectForm input:focus {
     border: 1px solid rgb(var(--main-blue));
     box-shadow: 0 0 3px 3px rgba(91, 141, 239, 0.15);

@@ -128,8 +128,8 @@ body.home #content {
     border-radius: 8px;
     cursor: pointer;
 
-    transition: transform 0.15s ease, 
-                box-shadow 0.15s ease;
+    transition: transform 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 .newTaskForm button:hover {
@@ -310,7 +310,7 @@ body.home #content {
 }
 
 .Notice {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     letter-spacing: 0.3px;
     font-weight: 600;
     color: var(--text);

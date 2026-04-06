@@ -1,12 +1,12 @@
 import "./Project-styles.css"
 import { format, parseISO } from 'date-fns'
-import { Todo, Project, loadState, updateState, myProjects, allProjects } from "./classes.js"
+import { Todo, Project, loadState, updateState, myProjects, allProjects, makeDefaultProject } from "./classes.js"
 import { createInput, option, makeDialog, makeForm, makeDiv, makeBtn, handleSubmit, getSvg, makeDelete, makeTick, makeEdit } from "./functions.js"
 import { Home } from "./home.js"
 import { clear } from "./index.js"
 
 function Projects() {
-    
+
     document.body.classList.add("projects")
     const contentBox = document.querySelector("#content")
 
@@ -76,27 +76,27 @@ function Projects() {
             const logos = makeDiv("projectDiv__logos")
 
             const editButton = document.createElement("button")
-                editButton.classList.add("projectDiv__button", "projectDiv__button--edit")
+            editButton.classList.add("projectDiv__button", "projectDiv__button--edit")
 
-                const editicon = makeEdit()
-                editicon.classList.remove("todoBox__svg--edit")
-                editicon.classList.add("projectDiv__svg--edit")
-                
-                editButton.append(editicon)
-            
+            const editicon = makeEdit()
+            editicon.classList.remove("todoBox__svg--edit")
+            editicon.classList.add("projectDiv__svg--edit")
+
+            editButton.append(editicon)
+
             const removeButton = document.createElement("button")
-                removeButton.classList.add("projectDiv__button", "projectDiv__button--delete")
+            removeButton.classList.add("projectDiv__button", "projectDiv__button--delete")
 
-                const removeicon = makeDelete()
-                removeicon.classList.remove("todoBox__svg--delete")
-                removeicon.classList.add("projectDiv__svg--delete")
+            const removeicon = makeDelete()
+            removeicon.classList.remove("todoBox__svg--delete")
+            removeicon.classList.add("projectDiv__svg--delete")
 
-                removeButton.append(removeicon)
+            removeButton.append(removeicon)
 
             logos.append(editButton, removeButton)
-            
+
             projectDiv.addEventListener("click", e => {
-                
+
                 if (e.target.closest(".projectDiv__button--edit")) {
                     currentProject = project
                     projectTitleInput.value = project.title
@@ -144,6 +144,7 @@ function Projects() {
             myProjects.splice(removeIndex, 1)
             delete allProjects[projectId]
         }
+        makeDefaultProject()
         updateState()
     }
 }

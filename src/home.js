@@ -13,7 +13,7 @@ function Home(projectId) {
     myProjects.forEach(project => {
         projectIds.push(project.id)
     })
-    
+
     if (projectId) {
         projectId = projectId
     } else if (projectIds.includes(0)) {
@@ -81,14 +81,14 @@ function Home(projectId) {
 
     /* Function to render Todos and display it/ add to the DOM */
     function renderTodos() {
-        
+
         todoBox.replaceChildren()
         loadState()
 
-        if (allProjects[projectId].length<1) {
+        if (allProjects[projectId].length < 1) {
             const Notice = document.createElement("h2")
-                Notice.textContent = "Congrats! You have no task left to do."
-                Notice.classList.add("Notice")
+            Notice.textContent = "Congrats! You have no task left to do."
+            Notice.classList.add("Notice")
 
             todoBox.appendChild(Notice)
         }
@@ -146,7 +146,7 @@ function Home(projectId) {
                 if ((e.target === e.currentTarget) || (e.target.closest(".todoBox__button--edit"))) {
                     const todo2Edit = allProjects[projectId].find(todo => todo.taskId == taskDiv.dataset.id)
                     currentTodo = todo2Edit
-            
+
                     titleDiv.textContent = "Edit Task"
                     addBtn.textContent = "Save"
                     titleInput.value = todo2Edit.title

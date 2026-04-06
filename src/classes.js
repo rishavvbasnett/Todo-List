@@ -20,7 +20,7 @@ class Todo {
 
 /*The PROJECT CLASS */
 class Project {
-    constructor({title, id}) {
+    constructor({ title, id }) {
         this.title = title
         if (id === 0) {
             this.id = 0
@@ -36,25 +36,24 @@ class Project {
 
 /* function to fetch update exisiting allProjects and myProjects from localStorage */
 function loadState() {
-
-    const storedProjects = localStorage.getItem("allProjects")
-    const storedMyProjects = localStorage.getItem("myProjects")
-
-    if (!storedProjects && !storedMyProjects || storedProjects === "{}" && storedMyProjects === "[]") {
-        localStorage.clear()
-        allProjects = {0: []}
-        myProjects = [{title: "Default List", id: 0}]
-        updateState()
-    } else {
-        allProjects = JSON.parse(localStorage.getItem("allProjects"))
-        myProjects = JSON.parse(localStorage.getItem("myProjects"))
-    }
-    
+    allProjects = JSON.parse(localStorage.getItem("allProjects")) || {}
+    myProjects = JSON.parse(localStorage.getItem("myProjects")) || []
 }
+
 /* function to update allProjects and myProjects to localStorage */
 function updateState() {
     localStorage.setItem("allProjects", JSON.stringify(allProjects))
     localStorage.setItem("myProjects", JSON.stringify(myProjects))
 }
 
-export { Todo, Project, allProjects, myProjects, loadState, updateState }
+/* function to ensure default project exists when everything is deleted */
+function makeDefaultProject() {
+    if (myProjects.length === 0) {
+        allProjects = { 0: [] }
+        myProjects.push({ title: "Default List", id: 0 })
+        updateState()
+    }
+}
+
+
+export { Todo, Project, allProjects, myProjects, loadState, updateState, makeDefaultProject }
