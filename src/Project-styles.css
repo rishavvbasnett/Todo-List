@@ -56,14 +56,113 @@ body.projects #content {
 }
 
 /* The project Cards */
-.projectListBox>div {
+.projectDiv {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
-    border: 2px solid rgb(0, 0, 0);
-    padding: 1rem 0;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+
+    position: relative;
+    background-color: #e0e1ea;
+    color: var(--text);
+
+    transition: 
+        transform 0.2s ease,
+        width 0.2s ease;
+
+    border-radius: 12px;
 }
+
+.projectDiv::before {
+    content: "";
+    height: 100%;
+    width: 10px;
+    border-radius: 12px 0 0 12px;
+    background-color: rgb(var(--main-blue));
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.2s ease;
+}
+
+.projectDiv:hover::before{
+    width: 21px;
+}
+.projectDiv:hover {
+    transform: translateY(-3px);
+    box-shadow: rgba(10, 10, 10, 0.04);
+}
+
+/* logo Div for the svg */
+.projectDiv__logos {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.projectDiv__button {
+    height: 40px;
+    width: 40px;
+    padding: 4px;
+    line-height: 8px;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 
+        transform 0.2s ease,
+        background-color 0.15s ease;
+    ;
+}
+
+.projectDiv__button:hover {
+    transform: translateY(-2px);
+    background-color: rgba(0, 0, 0, 0.04);
+}
+.projectDiv:hover .projectDiv__title {
+    transform: translateX(0.8rem);
+}
+
+.projectDiv__button>svg {
+    background-color: transparent;
+    height: clamp(24px, 24px + 0.8vw, 27px);
+    width: clamp(24px, 24px + 0.8vw, 27px);
+    stroke-width: 1.5px;
+    stroke: black;
+    fill: none;
+    
+    transition: stroke 0.13s ease;
+}
+
+.projectDiv__button--edit:hover .projectDiv__svg--edit {
+    stroke: blue;
+}
+.projectDiv__button--delete:hover .projectDiv__svg--delete {
+    stroke: red;
+}
+
+/* project Title */
+.projectDiv__title {
+    font-weight: 600;
+    font-size: clamp(1.1rem, 1.14rem + 0.2vw, 1.4rem);
+    transition: translate 0.2s ease;
+}
+
+
+
+
+
+
+
+
+
+
 
 /* New Project Dialog Box */
 .NewProject:modal {

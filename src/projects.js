@@ -76,20 +76,20 @@ function Projects() {
             const logos = makeDiv("projectDiv__logos")
 
             const editButton = document.createElement("button")
-                editButton.classList.add("projectDiv__button--edit")
+                editButton.classList.add("projectDiv__button", "projectDiv__button--edit")
 
                 const editicon = makeEdit()
-                editButton.classList.remove("todoBox__svg--edit")
-                editButton.classList.add("projectDiv__svg--edit")
+                editicon.classList.remove("todoBox__svg--edit")
+                editicon.classList.add("projectDiv__svg--edit")
                 
                 editButton.append(editicon)
             
             const removeButton = document.createElement("button")
-                removeButton.classList.add("projectDiv__button--delete")
+                removeButton.classList.add("projectDiv__button", "projectDiv__button--delete")
 
                 const removeicon = makeDelete()
-                removeButton.classList.remove("todoBox__svg--delete")
-                removeButton.classList.add("projectDiv__svg--delete")
+                removeicon.classList.remove("todoBox__svg--delete")
+                removeicon.classList.add("projectDiv__svg--delete")
 
                 removeButton.append(removeicon)
 

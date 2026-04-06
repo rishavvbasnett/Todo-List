@@ -191,7 +191,7 @@ body.home #content {
     content: "";
     position: absolute;
     height: 100%;
-    width: 8px;
+    width: 10px;
     border-radius: 12px 0 0 12px;
     background-color: none;
     transition: width 0.2s ease;
@@ -219,7 +219,7 @@ body.home #content {
 }
 
 .todoBox__task:hover::before {
-    width: 20px;
+    width: 21px;
 }
 
 /* Todo Title */
@@ -290,8 +290,8 @@ body.home #content {
 
 /* Hover modes for the SVG Icons */
 .todoBox__button:hover {
-    transform: translateY(-2px);
-    background-color: rgba(0, 0, 0, 0.02);
+    transform: translateY(-3px);
+    background-color: rgba(10, 10, 10, 0.04);
 }
 
 .todoBox__button:hover .todoBox__svg--tick {

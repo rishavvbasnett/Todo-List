@@ -159,7 +159,6 @@ function Home(projectId) {
 
                 } else if (e.target.closest(".todoBox__button--delete")) {
                     const delId = taskDiv.dataset.id
-                    console.log('CLIedk')
                     const delIndex = allProjects[projectId].findIndex(todo => todo.taskId == delId)
                     allProjects[projectId].splice(delIndex, 1)
                     updateState()
